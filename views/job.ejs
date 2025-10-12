@@ -1,0 +1,58 @@
+<%- include("partials/head.ejs") %>
+  <%- include("partials/header.ejs") %>
+    <% if (job) { %>
+      <h2>Edit the job</h2>
+        <form method="POST" action="/jobs/update/<%= job.id %>">
+          <input type="hidden" name="_csrf" value="<%= csrf %>">
+          <div>
+            <label for="company">Company: </label>
+            <input name="company" value="<%= job.company %>"/>
+          </div>
+          <div>
+            <label for="position">Position: </label>
+            <input name="position" value="<%= job.position %>"/>
+          </div>
+          <div>
+            <label for="status">Status:</label>
+            <select name="status">
+              <option value="interview" <%= job.status === "interview" ? 'selected' : ''%>>Interview</option>
+              <option value="declined" <%= job.status === "declined" ? 'selected' : ''%>>Declined</option>
+              <option value="pending" <%= job.status === "pending" ? 'selected' : ''%> >Pending</option>
+            </select>
+          </div>
+          <div>
+            <button>Update</button>
+            <a href="/jobs">
+              <button type="button">Cancel</button>
+            </a>
+          </div>
+        </form>
+      <% } else { %>
+        <h2>Add a job</h2>
+        <form method="POST" action="/jobs">
+          <input type="hidden" name="_csrf" value="<%= csrf %>">
+          <div>
+            <label for="company">Company: </label>
+            <input name="company" />
+          </div>
+          <div>
+            <label for="position">Position: </label>
+            <input name="position" />
+          </div>
+          <div>
+            <label for="status">Status:</label>
+            <select name="status">
+              <option value="interview">Interview</option>
+              <option value="declined">Declined</option>
+              <option value="pending" selected>Pending</option>
+            </select>
+          </div>
+          <div>
+            <button>Create</button>
+            <a href="/jobs">
+              <button type="button">Cancel</button>
+            </a>
+          </div>
+        </form>
+        <% } %>
+        <%- include("partials/footer.ejs") %>
