@@ -2,7 +2,8 @@
 <% if (user) { %>
    <p>User <%= user.name %> is logged on.</p>
    <form method="POST" action="/sessions/logoff">
-   <button>Logoff</button>
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <button>Logoff</button>
    </form>
 <% } %>
 <% if (errors) {
