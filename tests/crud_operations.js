@@ -1,9 +1,7 @@
 const Job = require("../models/Job");
 const { app } = require("../app");
-const { seed_db, testUserPassword } = require("../util/seed_db");
+const { seed_db, testUserPassword, factory } = require("../util/seed_db");
 const get_chai = require("../util/get_chai");
-const FactoryBot = require("factory-bot");
-const factory = FactoryBot.factory;
 
 describe("tests for Job CRUD operations", async function() {
   before(async () => {

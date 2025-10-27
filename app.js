@@ -50,10 +50,11 @@ app.use(session(sessionParms));
 
 //csrf
 const csrf = require("host-csrf");
-const csrfMiddleware = csrf.csrf();
+//default csrf token name will be "host-csrfToken"
+const csrfMiddleware = csrf.csrf("csrfToken");
 app.use(csrfMiddleware);
 app.use((req, res, next) => {
-  res.locals.csrf = csrf.refreshToken(req,res);
+  res.locals.csrf = req.csrfToken ? req.csrfToken() : csrf.getToken(req, res);
   next();
 })
 

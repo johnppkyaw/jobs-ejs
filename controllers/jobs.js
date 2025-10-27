@@ -24,13 +24,14 @@ const createJob = async(req, res) => {
   }
   try {
     const job = await Job.create(newJob);
+    req.flash("info", "The job listing has been added!");
+    return res.redirect("/jobs");
   } catch(e) {
       if (e.constructor.name === "ValidationError") {
       parseVErr(e, req);
     }
     return res.redirect("/jobs/new");
   }
-  res.redirect("/jobs");
 }
 
 //GET /jobs/edit/:id (Get a particular entry and show it in the edit box)
@@ -42,7 +43,7 @@ const getJob = async(req, res) => {
   })
 
   if(!job) {
-    req.flash("error", `No job found with ID ${jobId}`);
+    req.flash("error", `No job found with ID ${jobId}!`);
     return res.redirect("/jobs");
   }
 
@@ -63,7 +64,8 @@ const updateJob = async(req, res) => {
       req.body, 
       {new: true, runValidators: true}
     );
-    res.redirect("/jobs");
+    req.flash("info", "The job listing has been updated successfully!");
+    return res.redirect("/jobs");
   } catch (e) {
     if (e.constructor.name === "ValidationError") {
       parseVErr(e, req);
@@ -87,6 +89,7 @@ const deleteJob = async(req, res) => {
     return res.redirect("/jobs");
   };
 
+  req.flash("info", "The job listing has been deleted successfully!");
   res.redirect("/jobs");
 }
 
