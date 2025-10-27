@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test mocha tests/*.js --timeout 5000 --exit"
   },
   "author": "",
   "license": "ISC",
@@ -29,5 +29,14 @@
     "passport-local": "^1.0.0",
     "prettier": "^3.6.2",
     "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9",
+    "@faker-js/faker": "^9.9.0",
+    "chai": "^5.3.3",
+    "chai-http": "^5.1.2",
+    "factory-bot": "^6.3.1",
+    "mocha": "^11.7.4",
+    "puppeteer": "^24.26.1"
   }
 }
